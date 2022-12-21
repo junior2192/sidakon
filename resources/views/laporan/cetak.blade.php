@@ -67,18 +67,25 @@
             </table>
         </div>
     </div>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script type="text/php">
-        if (isset($pdf)) {
-        $text = "page {PAGE_NUM} / {PAGE_COUNT}";
-        $size = 10;
-        $font = $fontMetrics->getFont("Verdana");
-        $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
-        $x = ($pdf->get_width() - $width) / 2;
-        $y = $pdf->get_height() - 35;
-        $pdf->page_text($x, $y, $text, $font, $size);
-    }
-</script>
+        if ( isset($pdf) ) {
+    	  //$text = "Page {PAGE_NUM} of {PAGE_COUNT}";
+          //$pdf->page_text(250, 10, $text, 'arial', 10, array(0,0,0));
+    	  //$pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+    	    $x = 280;
+            $y = $pdf->get_height()-35;           
+    	    $text = "{PAGE_NUM} of {PAGE_COUNT}";
+            $font = $fontMetrics->get_font("helvetica", "bold");
+            $size = 7;
+            $color = array(0,0,0);
+            $word_space = 0.0;  //  default
+            $char_space = 0.0;  //  default
+            $angle = 0.0;   //  default
+            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+        }
+    </script>
 </body>
 
 </html>

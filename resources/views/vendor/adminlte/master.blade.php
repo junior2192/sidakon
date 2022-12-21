@@ -24,6 +24,8 @@
     @yield('styles')
     @yield('styles2')
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.png') }}">
+
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">

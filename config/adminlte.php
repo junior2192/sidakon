@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'SIdakon',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -350,7 +350,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Data Bangunan',
-                    'route' => 'bangunan.create',
+                    'route' => 'bangunan.index',
                 ],
                 [
                     'text' => 'Tambah Bangunan',
