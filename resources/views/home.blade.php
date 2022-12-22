@@ -10,28 +10,28 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
+            <div class="col-md-6">
                 <div class="info-box bg-dark">
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-archive"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Data Paket</span>
-                        <span class="info-box-number">
+                        <h5 class="info-box-number">
                             {{ $dataPaket }}
-                            <small></small>
-                        </span>
+
+                        </h5>
                     </div>
                 </div>
 
             </div>
-            <div class="col-12 col-sm-6 col-md-3">
+            <div class="col-md-6">
                 <div class="info-box bg-dark">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-building"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Data Bangunan</span>
-                        <span class="info-box-number">
+                        <h5 class="info-box-number">
                             {{ $dataBangunan }}
-                            <small></small>
-                        </span>
+
+                        </h5>
                     </div>
                 </div>
 
