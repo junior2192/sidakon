@@ -9,10 +9,17 @@
 
 @section('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .cap {
+        text-transform: capitalize;
+    }
+</style>
 @endsection
 
+
+
 @section('content')
-<div class="card col-8">
+<div class="card col-sm-8">
     {{-- <div class="card-header">Tambah Bangunan</div> --}}
     <div class="card-body">
         <form action="{{ route('bangunan.create') }}" method="post">
@@ -37,35 +44,41 @@
                 <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
-
             <div class="form-group row">
                 <label for="provinsi">Provinsi</label>
+
                 <select class="form-control" name="province_id" id="province_id" required>
                     <option>--Pilih Salah Satu--</option>
                     @foreach ($provinsi as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
+
             </div>
             <div class="form-group row">
                 <label for="kota">Kabupaten / Kota</label>
+
                 <select class="form-control" name="city_id" id="city_id" required>
                     <option>--Pilih Salah Satu--</option>
                 </select>
+
             </div>
             <div class="form-group row">
                 <label for="kecamatan">Kecamatan</label>
+
                 <select class="form-control" name="district_id" id="district_id" required>
                     <option>--Pilih Salah Satu--</option>
                 </select>
+
             </div>
             <div class="form-group row">
                 <label for="desa">Desa</label>
+
                 <select class="form-control" name="village_id" id="village_id" required>
                     <option>--Pilih Salah Satu--</option>
                 </select>
-            </div>
 
+            </div>
             <div class="form-group">
                 <label>Status Konstruksi</label>
                 <div class="form-check">
@@ -132,6 +145,8 @@
 </script> --}}
 <script>
     $(document).ready(function(){
+
+        
         $('input[type=radio][name=status]').change(function(){
             if(this.value == '0'){
                 $('#tahun_konstruksi_label').attr('hidden',true);

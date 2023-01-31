@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\BangunanController;
+use App\Http\Controllers\DependentDropdownController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PaketController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PaketController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\BangunanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,6 @@ Route::get('cities', [DependentDropdownController::class, 'cities'])->name('citi
 Route::get('districts', [DependentDropdownController::class, 'districts'])->name('districts');
 Route::get('villages', [DependentDropdownController::class, 'villages'])->name('villages');
 
-
 Route::middleware('auth')->prefix('paket')->group(function(){
     Route::get('', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('bangunan')->group(function(){
     Route::get('/edit/{bangunan}', [BangunanController::class, 'edit'])->name('bangunan.edit');
     Route::put('/edit/{bangunan}', [BangunanController::class, 'update']);
     Route::delete('/{bangunan}', [BangunanController::class, 'delete'])->name('bangunan.delete');
+
 });
 
 Route::middleware('auth')->prefix('laporan')->group(function(){

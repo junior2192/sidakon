@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Paket;
 use App\Models\Bangunan;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
-use Laravolt\Indonesia\Models\Province;
+use yajra\Datatables\Datatables;
 use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
+
 
 class BangunanController extends Controller
 {
@@ -69,6 +70,7 @@ class BangunanController extends Controller
             'status' => 'required',
             // 'tahun_konstruksi' => 'required',
         ]);
+
         $validateData['tahun_konstruksi'] = $request->tahun_konstruksi;
         Bangunan::create($validateData);
         return redirect()->route('bangunan.index')->with('success', 'Data berhasil ditambahkan');
@@ -80,7 +82,8 @@ class BangunanController extends Controller
         $pakets = Paket::all();
         $provinsi = \Indonesia::allProvinces();
 
-        $kota1 = \Indonesia::findCity($bangunan->city_id, $with = null);
+
+        $kota1 =  \Indonesia::findCity($bangunan->city_id, $with = null);
         $kota = City::where('province_code', '=', $kota1->province->code)->get();
 
         $kecamatan1 = \Indonesia::findDistrict($bangunan->district_id, $with = null);
@@ -89,15 +92,15 @@ class BangunanController extends Controller
         $desa1 = \Indonesia::findVillage($bangunan->village_id, $with = null);
         $desa = Village::where('district_code', '=', $desa1->district->code)->get();
 
-
         return view('bangunan.edit', compact(
             'bangunan', 
-            'pakets',
+            'pakets', 
             'provinsi',
             'kota',
             'kecamatan',
             'desa'
         ));
+        //dd($kecamatan);
     }
 
     public function update(Request $request, Bangunan $bangunan)
