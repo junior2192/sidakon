@@ -28,6 +28,9 @@
                     <th>#</th>
                     <th>Tahun Anggaran</th>
                     <th>Nama Paket</th>
+                    <th>No. Kontrak</th>
+                    <th>Tgl. Kontrak</th>
+                    <th>Penyedia Jasa</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -73,6 +76,9 @@
           {data: 'id', name: 'id'},
           {data: 'tahun_anggaran', name: 'tahun_anggaran'},
           {data: 'name', name: 'name'},
+          {data: 'no_kontrak', name: 'n_kontrak'},
+          {data: 'tgl_kontrak', name: 'tgl_kontrak'},
+          {data: 'penyedia_jasa', name: 'penyedia_jasa'},
           {
               data: 'action', 
               name: 'action', 

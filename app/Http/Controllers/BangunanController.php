@@ -6,6 +6,10 @@ use App\Models\Paket;
 use App\Models\Bangunan;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\Province;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Village;
 
 class BangunanController extends Controller
 {
@@ -48,8 +52,9 @@ class BangunanController extends Controller
 
     public function create()
     {
+        $provinsi = Province::all();
         $pakets = Paket::all();
-        return view('bangunan.create', compact('pakets'));
+        return view('bangunan.create', compact('pakets', 'provinsi'));
     }
 
     public function store(Request $request)
@@ -57,6 +62,10 @@ class BangunanController extends Controller
         $validateData = $request->validate([
             'paket_id' => 'required',
             'name' => 'required',
+            'province_id' => 'required',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'village_id' => 'required',
             'status' => 'required',
             // 'tahun_konstruksi' => 'required',
         ]);
@@ -69,7 +78,26 @@ class BangunanController extends Controller
     public function edit(Bangunan $bangunan)
     {
         $pakets = Paket::all();
-        return view('bangunan.edit', compact('bangunan', 'pakets'));
+        $provinsi = \Indonesia::allProvinces();
+
+        $kota1 = \Indonesia::findCity($bangunan->city_id, $with = null);
+        $kota = City::where('province_code', '=', $kota1->province->code)->get();
+
+        $kecamatan1 = \Indonesia::findDistrict($bangunan->district_id, $with = null);
+        $kecamatan = District::where('city_code', '=', $kecamatan1->city->code)->get();
+
+        $desa1 = \Indonesia::findVillage($bangunan->village_id, $with = null);
+        $desa = Village::where('district_code', '=', $desa1->district->code)->get();
+
+
+        return view('bangunan.edit', compact(
+            'bangunan', 
+            'pakets',
+            'provinsi',
+            'kota',
+            'kecamatan',
+            'desa'
+        ));
     }
 
     public function update(Request $request, Bangunan $bangunan)
@@ -77,6 +105,10 @@ class BangunanController extends Controller
         $validateData = $request->validate([
             'paket_id' => 'required',
             'name' => 'required',
+            'province_id' => 'required',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'village_id' => 'required',
             'status' => 'required',
         ]);
         $bangunan['tahun_konstruksi'] = $request->tahun_konstruksi;
